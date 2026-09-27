@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# Secrets and local config
+.env
+.env.local
+
+# Model weights: multi-gigabyte, re-downloadable
+models/
+
+# Scratch artefacts
+*.wav
+*.mp3
+!backend/tests/fixtures/*.wav
+scratch_*.wav
+
+# OS
+.DS_Store
+Thumbs.db
