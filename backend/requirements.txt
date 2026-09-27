@@ -1,0 +1,47 @@
+# LinguaLive - backend dependencies
+# Python 3.12+
+#
+# Versions are pinned so a rebuild months from now produces the same behaviour.
+# Regenerate with: pip install -U <pkg> && pip freeze | grep <pkg>
+
+# --- Web framework -------------------------------------------------------- #
+Flask==3.1.0
+Flask-Cors==5.0.0
+flask-sock==0.7.0                 # WebSocket support for live streaming
+Werkzeug==3.1.3
+
+# --- Configuration and validation ----------------------------------------- #
+pydantic==2.10.1
+pydantic-settings==2.15.0
+python-dotenv==1.0.1
+
+# --- Speech recognition ---------------------------------------------------- #
+faster-whisper==1.2.1             # CTranslate2 Whisper: ~4x faster than transformers on CPU
+ctranslate2==4.8.1
+
+# --- Translation and neural TTS -------------------------------------------- #
+transformers==4.44.2              # NLLB-200 (seq2seq) and MMS-TTS (VITS)
+torch==2.4.1
+sentencepiece==0.2.0              # required by the NLLB tokenizer
+protobuf==5.28.2                  # required by some tokenizer conversions
+
+# --- Speech synthesis ------------------------------------------------------ #
+gTTS==2.5.3                       # hosted fallback, no API key needed
+# The formant synthesiser in app/tts/synth.py has no dependencies beyond numpy.
+
+# --- Audio ----------------------------------------------------------------- #
+av==13.1.0                        # FFmpeg bindings: decodes WebM/Opus from MediaRecorder
+numpy==2.0.2
+scipy==1.14.1
+
+# --- Runtime --------------------------------------------------------------- #
+requests==2.32.3
+psutil==6.1.0                     # RSS reporting on /api/health
+gunicorn==23.0.0 ; sys_platform != "win32"
+# gevent worker class: required for flask-sock WebSockets under gunicorn.
+gevent==24.11.1 ; sys_platform != "win32"
+waitress==3.0.2 ; sys_platform == "win32"
+
+# --- Tests ----------------------------------------------------------------- #
+pytest==9.1.1
+pytest-cov==7.1.1
